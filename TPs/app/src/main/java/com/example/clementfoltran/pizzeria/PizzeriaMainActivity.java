@@ -18,12 +18,12 @@ public class PizzeriaMainActivity extends AppCompatActivity implements View.OnCl
     public final static String SAUVEGARDE_HAWAI = "compteur hawai";
     public final static String SAUVEGARDE_PANA_COTTA = "compteur pana cotta";
     public final static String SAUVEGARDE_TIRAMISU = "compteur tiramisu";
-    final static String CLE_RES = "passage numTable";
+    final static String CLE_RES = "passage du numéro de table";
     public  Button button1;
     public  Button button2;
     private Button button3, button4, button5, button6, button7, button8;
     private int napolitaine, royale, fromages, montagnarde, raclette, hawai, pannacotta, tiramisu;
-    private String tableNum;
+    private int tableNum;
 
     @Override
     protected void onSaveInstanceState (Bundle outState) {
@@ -40,19 +40,21 @@ public class PizzeriaMainActivity extends AppCompatActivity implements View.OnCl
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        String tableText;
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pizzeria_main);
 
-        Intent intent = getIntent();
-        int valeur = intent.getIntExtra(PizzeriaTableActivity.CLE_DONNEES, -1);
-        if (valeur == -1) {
+        //Intent intent = getIntent();
+        //tableNum = intent.getIntExtra(PizzeriaTableActivity.CLE_DONNEES, -1);
+        if (tableNum == -1) {
             Log.e("testError", "ERREUR DE CLÉ");
         }
 
-        tableNum = "Numéro de table : " + valeur;
+        tableText = "Numéro de table : " + tableNum;
 
         TextView tableTv = findViewById(R.id.textTable);
-        tableTv.setText(tableNum);
+        tableTv.setText(tableText);
 
 
         button1 = findViewById(R.id.button1);
@@ -102,14 +104,14 @@ public class PizzeriaMainActivity extends AppCompatActivity implements View.OnCl
 
     @Override
     public void onClick(View v) {
-        String nomCommande;
-
         if (v.getId() == R.id.button1) {
             napolitaine++;
-            button1.setText("NAPOLITAINE "+napolitaine);
-            nomCommande = (String) button1.getText();
-            Commande cHwai = new Commande();
-            cHwai.execute(napolitaine + "Napolitaire");
+            button1.setText("NAPOLITAINE " + napolitaine);
+            Commande nap = new Commande();
+            if (tableNum > 9)
+                nap.execute(tableNum + "Napolitaine");
+            nap.execute("0" + tableNum + "Napolitaine");
+
         }
 
         if (v.getId() == R.id.button2) {
@@ -151,9 +153,8 @@ public class PizzeriaMainActivity extends AppCompatActivity implements View.OnCl
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
-        if (requestCode == 1 && resultCode == RESULT_OK) {
-            int tableNum = intent.getIntExtra(CLE_RES, 0);
-        }
+        if (requestCode == 1 && resultCode == RESULT_OK)
+            tableNum = intent.getIntExtra(CLE_RES, 0);
     }
 
 

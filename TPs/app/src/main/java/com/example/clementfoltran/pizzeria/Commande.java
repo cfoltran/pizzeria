@@ -14,7 +14,7 @@ import java.net.Socket;
  */
 
 public class Commande extends AsyncTask<String, String, Void> {
-    private int port = 6666;
+    private int port = 9874;
 
     @Override
     protected Void doInBackground(String... values) {
@@ -24,6 +24,8 @@ public class Commande extends AsyncTask<String, String, Void> {
             PrintWriter writer = new PrintWriter(socket.getOutputStream(), true);
             BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             Log.e("INFO", "CONNECTION ESTABLISHED ON PORT "+port);
+
+            Log.e("Info", "Ici" + values[0]);
             writer.println(values[0]);
             String returnMessage = reader.readLine();
             if (returnMessage != null)
