@@ -21,10 +21,10 @@ public class PizzeriaTableActivity extends AppCompatActivity implements View.OnC
 
         setContentView(R.layout.activity_pizzeria_table);
 
-        validateButton = findViewById(R.id.validateButton);
+        validateButton = (Button) findViewById(R.id.validateButton);
         validateButton.setOnClickListener(this);
 
-        textField = findViewById(R.id.textTable);
+        textField = (EditText) findViewById(R.id.textTable);
     }
 
     @Override

@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+
 public class PizzeriaMainActivity extends AppCompatActivity implements View.OnClickListener {
 
     public final static String SAUVEGARDE_NAPOLITAINE = "compteur napolitaine";
@@ -45,40 +46,41 @@ public class PizzeriaMainActivity extends AppCompatActivity implements View.OnCl
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pizzeria_main);
 
-        //Intent intent = getIntent();
-        //tableNum = intent.getIntExtra(PizzeriaTableActivity.CLE_DONNEES, -1);
+        Intent intent = getIntent();
+        tableNum = intent.getIntExtra(PizzeriaTableActivity.CLE_DONNEES, -1);
         if (tableNum == -1) {
             Log.e("testError", "ERREUR DE CLÉ");
         }
 
         tableText = "Numéro de table : " + tableNum;
 
-        TextView tableTv = findViewById(R.id.textTable);
-        tableTv.setText(tableText);
+
+        TextView table = (TextView) findViewById(R.id.textTable);
+        table.setText(tableText);
 
 
-        button1 = findViewById(R.id.button1);
+        button1 = (Button) findViewById(R.id.button1);
         button1.setOnClickListener(this);
 
-        button2 = findViewById(R.id.button2);
+        button2 = (Button) findViewById(R.id.button2);
         button2.setOnClickListener(this);
 
-        button3 = findViewById(R.id.button3);
+        button3 = (Button) findViewById(R.id.button3);
         button3.setOnClickListener(this);
 
-        button4 = findViewById(R.id.button4);
+        button4 = (Button) findViewById(R.id.button4);
         button4.setOnClickListener(this);
 
-        button5 = findViewById(R.id.button5);
+        button5 = (Button) findViewById(R.id.button5);
         button5.setOnClickListener(this);
 
-        button6 = findViewById(R.id.button6);
+        button6 = (Button) findViewById(R.id.button6);
         button6.setOnClickListener(this);
 
-        button7 = findViewById(R.id.button7);
+        button7 = (Button) findViewById(R.id.button7);
         button7.setOnClickListener(this);
 
-        button8 = findViewById(R.id.button8);
+        button8 = (Button) findViewById(R.id.button8);
         button8.setOnClickListener(this);
 
         if (savedInstanceState != null) {
@@ -110,43 +112,80 @@ public class PizzeriaMainActivity extends AppCompatActivity implements View.OnCl
             Commande nap = new Commande();
             if (tableNum > 9)
                 nap.execute(tableNum + "Napolitaine");
-            nap.execute("0" + tableNum + "Napolitaine");
+            else
+                nap.execute("0" + tableNum + "Napolitaine");
 
         }
 
         if (v.getId() == R.id.button2) {
             royale++;
             button2.setText("ROYALE "+royale);
+            Commande nap = new Commande();
+            if (tableNum > 9)
+                nap.execute(tableNum + "Royale");
+            else
+                nap.execute("0" + tableNum + "Royale");
+
         }
 
         if (v.getId() == R.id.button3) {
             fromages++;
             button3.setText("QUATRE FROMAGES "+fromages);
+            Commande nap = new Commande();
+            if (tableNum > 9)
+                nap.execute(tableNum + "Quatre fromages");
+            else
+                nap.execute("0" + tableNum + "Quatre fromages");
         }
 
         if (v.getId() == R.id.button4) {
             montagnarde++;
             button4.setText("MONTAGNARDE " + montagnarde);
+            Commande nap = new Commande();
+            if (tableNum > 9)
+                nap.execute(tableNum + "Montagnarde");
+            else
+                nap.execute("0" + tableNum + "Montagnarde");
         }
 
         if (v.getId() == R.id.button5) {
             raclette++;
             button5.setText("RACLETTE "+raclette);
+            Commande nap = new Commande();
+            if (tableNum > 9)
+                nap.execute(tableNum + "Raclette");
+            else
+                nap.execute("0" + tableNum + "Raclette");
         }
 
         if (v.getId() == R.id.button6) {
             hawai++;
             button6.setText("HAWAI "+hawai);
+            Commande nap = new Commande();
+            if (tableNum > 9)
+                nap.execute(tableNum + "Hawai");
+            else
+                nap.execute("0" + tableNum + "Hawai");
         }
 
         if (v.getId() == R.id.button7) {
             pannacotta++;
             button7.setText("PANNA COTTA "+pannacotta);
+            Commande nap = new Commande();
+            if (tableNum > 9)
+                nap.execute(tableNum + "Pana cotta");
+            else
+                nap.execute("0" + tableNum + "Panna cotta");
         }
 
         if (v.getId() == R.id.button8) {
             tiramisu++;
             button8.setText("TIRAMISU "+tiramisu);
+            Commande nap = new Commande();
+            if (tableNum > 9)
+                nap.execute(tableNum + "Tiramisu");
+            else
+                nap.execute("0" + tableNum + "Tiramisu");
         }
 
     }
