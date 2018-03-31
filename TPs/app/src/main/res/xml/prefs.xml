@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:title="Setting">
+        <SwitchPreference
+            android:title="Changer la couleur de l'interface"
+            android:defaultValue="false"
+            android:key="@string/COLOR"/>
+    </PreferenceCategory>
+</PreferenceScreen>

@@ -157,7 +157,7 @@ public class FragmentPizza extends Fragment implements View.OnClickListener {
         if (v.getId() == R.id.custom) {
             FragmentPizzaCustom fragmentPizzaCustom = new FragmentPizzaCustom();
             FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.fragementContainer, fragmentPizzaCustom);
+            fragmentTransaction.replace(R.id.fragmentContainer, fragmentPizzaCustom);
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
         }

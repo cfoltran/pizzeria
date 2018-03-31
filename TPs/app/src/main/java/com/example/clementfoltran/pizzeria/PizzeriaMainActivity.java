@@ -2,10 +2,15 @@ package com.example.clementfoltran.pizzeria;
 
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
+import android.preference.PreferenceFragment;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 
@@ -22,6 +27,8 @@ public class PizzeriaMainActivity extends AppCompatActivity implements FragmentP
     final static String CLE_RES = "passage du numéro de table";
     public static int tableNum;
     public static String num;
+
+    FragmentPreferences fragmentPreferences = new FragmentPreferences();
 
 
     /*
@@ -71,7 +78,7 @@ public class PizzeriaMainActivity extends AppCompatActivity implements FragmentP
         //Ajoutons le Fragment pizza
         FragmentPizza fragmentPizza = new FragmentPizza();
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.fragementContainer, fragmentPizza);
+        fragmentTransaction.replace(R.id.fragmentContainer, fragmentPizza);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
 
@@ -110,6 +117,34 @@ public class PizzeriaMainActivity extends AppCompatActivity implements FragmentP
         intent.putExtra(CLE_RES, 42);
         setResult(RESULT_OK, intent);
         super.finish();
+    }
+
+    //PARTIE 7
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.settings) {
+            getFragmentManager().beginTransaction().addToBackStack("pref").replace(R.id.fragmentContainer, fragmentPreferences).commit();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        applyPref();
+    }
+
+    protected void applyPref() {
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        sharedPref.getBoolean(String.valueOf(getResources().getText(R.string.COLOR)), true);
     }
 
     @Override

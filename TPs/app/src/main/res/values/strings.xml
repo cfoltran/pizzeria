@@ -1,6 +1,16 @@
 <resources>
     <string name="app_name">Pizzeria</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="key_hawaienne">KEY_HAW</string>
+    <string name="key_montagnarde">KEY_MONT</string>
+    <string name="key_napolitaine">KEY_NAPO</string>
+    <string name="key_pannaCotta">KEY_PANCOTA</string>
+    <string name="key_qfrommage">KEY_QFROM</string>
+    <string name="key_raclette">KEY_RACL</string>
+    <string name="key_royale">KEY_ROY</string>
+    <string name="key_tiramisu">KEY_TIRA</string>
+
+    <string name="key_table">KEY_TABLE</string>
+    <string name="table">table numero: </string>
+    <string name="COLOR">COLOR </string>
 </resources>

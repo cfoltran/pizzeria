@@ -66,53 +66,55 @@ public class FragmentPizzaCustom extends Fragment implements View.OnClickListene
     public void onClick(View view) {
         if (view.getId() == R.id.mozzarella) {
             mozzarella.setBackgroundColor(Color.WHITE);
-            topping += (String) mozzarella.getText();
+            topping += "+"+ mozzarella.getText();
         }
 
         if (view.getId() == R.id.gorgonzola) {
             gorgonzola.setBackgroundColor(Color.WHITE);
-            topping += (String) gorgonzola.getText();
+            topping += "+"+ gorgonzola.getText();
         }
 
         if (view.getId() == R.id.olives) {
             olives.setBackgroundColor(Color.WHITE);
-            topping += (String) olives.getText();
+            topping += "+"+ olives.getText();
         }
 
         if (view.getId() == R.id.anchois) {
             anchois.setBackgroundColor(Color.WHITE);
-            topping += (String) anchois.getText();
+            topping += "+"+ anchois.getText();
         }
 
         if (view.getId() == R.id.artichaud) {
             artichaud.setBackgroundColor(Color.WHITE);
-            topping += (String) artichaud.getText();
+            topping += "+"+ artichaud.getText();
         }
 
         if (view.getId() == R.id.capres) {
             capres.setBackgroundColor(Color.WHITE);
-            topping += (String) capres.getText();
+            topping += "+"+ capres.getText();
         }
 
         if (view.getId() == R.id.jamcru) {
             jamcru.setBackgroundColor(Color.WHITE);
-            topping += (String) jamcru.getText();
+            topping += "+"+ jamcru.getText();
         }
 
         if (view.getId() == R.id.jamcui) {
             jamcui.setBackgroundColor(Color.WHITE);
-            topping += (String) jamcui.getText();
+            topping += "+"+ jamcui.getText();
         }
 
         if (view.getId() == R.id.envoyer) {
+            int table = PizzeriaMainActivity.tableNum;
+
             Commande customOrder = new Commande();
-            Log.e("INFO", " "+PizzeriaMainActivity.tableNum+topping);
-            customOrder.execute("0"+PizzeriaMainActivity.num+topping);
+            Log.e("INFO", table+topping);
+            customOrder.execute(table+topping);
 
 
             FragmentPizza fragmentPizza = new FragmentPizza();
             FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.fragementContainer, fragmentPizza);
+            fragmentTransaction.replace(R.id.fragmentContainer, fragmentPizza);
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
         }

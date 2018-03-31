@@ -1,5 +1,6 @@
 package com.example.clementfoltran.pizzeria;
 
+import android.app.AlertDialog;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -16,6 +17,8 @@ import java.net.Socket;
 public class Commande extends AsyncTask<String, String, Void> {
     private int port = 9874;
 
+
+
     @Override
     protected Void doInBackground(String... values) {
         Socket socket = null;
@@ -31,6 +34,18 @@ public class Commande extends AsyncTask<String, String, Void> {
             if (returnMessage != null)
                 System.out.println(returnMessage);
             publishProgress(returnMessage);
+
+            //force à attendre une réponse du serveur pour indiquer que le plat est prêt
+            String returnMessage2 = "";
+            while(returnMessage2.equals("")){
+                returnMessage2 = reader.readLine();
+            }
+            publishProgress(returnMessage2);
+            Log.e("INFO", ""+returnMessage2);
+            //Signaler à l'application que la pizza est prête
+
+
+
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -47,4 +62,5 @@ public class Commande extends AsyncTask<String, String, Void> {
 
         return null;
     }
+
 }
