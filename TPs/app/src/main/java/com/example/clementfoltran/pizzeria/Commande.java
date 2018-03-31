@@ -1,6 +1,5 @@
 package com.example.clementfoltran.pizzeria;
 
-import android.app.AlertDialog;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -10,13 +9,16 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
+import static com.example.clementfoltran.pizzeria.FragmentPizza.text;
+
 /**
  * Created by clementfoltran on 21/03/2018.
  */
 
 public class Commande extends AsyncTask<String, String, Void> {
     private int port = 9874;
-
+    private String returnMessage2 = "";
+    private String returnMessage = "";
 
 
     @Override
@@ -30,21 +32,17 @@ public class Commande extends AsyncTask<String, String, Void> {
 
             Log.e("Info", "Ici" + values[0]);
             writer.println(values[0]);
-            String returnMessage = reader.readLine();
+            returnMessage = reader.readLine();
             if (returnMessage != null)
                 System.out.println(returnMessage);
             publishProgress(returnMessage);
 
             //force à attendre une réponse du serveur pour indiquer que le plat est prêt
-            String returnMessage2 = "";
-            while(returnMessage2.equals("")){
+            while(returnMessage2.equals("")) {
                 returnMessage2 = reader.readLine();
             }
             publishProgress(returnMessage2);
-            Log.e("INFO", ""+returnMessage2);
             //Signaler à l'application que la pizza est prête
-
-
 
         }
         catch (Exception e) {
@@ -63,4 +61,13 @@ public class Commande extends AsyncTask<String, String, Void> {
         return null;
     }
 
+    @Override
+    protected void onProgressUpdate(String... values) {
+        text.setText(returnMessage);
+    }
+
+    @Override
+    protected void onPostExecute(Void aVoid) {
+        text.setText(returnMessage2);
+    }
 }

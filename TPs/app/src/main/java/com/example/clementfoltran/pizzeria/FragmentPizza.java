@@ -1,9 +1,11 @@
 package com.example.clementfoltran.pizzeria;
 
-
 import android.app.FragmentTransaction;
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.app.Fragment;
 import android.view.LayoutInflater;
@@ -11,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-
 
 
 /**
@@ -161,6 +162,8 @@ public class FragmentPizza extends Fragment implements View.OnClickListener {
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
         }
+
+
     }
 
     /**
@@ -176,6 +179,29 @@ public class FragmentPizza extends Fragment implements View.OnClickListener {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        applyPref();
+    }
+
+    protected void applyPref() {
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        boolean color = sharedPref.getBoolean(String.valueOf(getResources().getText(R.string.COLOR)), true);
+
+        if(color){
+            custom.setBackgroundColor(Color.GRAY);
+            button1.setBackgroundColor(Color.GRAY);
+            button2.setBackgroundColor(Color.GRAY);
+            button3.setBackgroundColor(Color.GRAY);
+            button4.setBackgroundColor(Color.GRAY);
+            button5.setBackgroundColor(Color.GRAY);
+            button6.setBackgroundColor(Color.GRAY);
+            button7.setBackgroundColor(Color.GRAY);
+            button8.setBackgroundColor(Color.GRAY);
+        }
     }
 }
 
